@@ -1,0 +1,759 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+body{
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+.main{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-image: url("grey1.png");
+    background-size: cover;
+    min-height: 1200px;
+    box-sizing:border-box;
+}
+.main_container{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    width: 1100px;
+    min-height: 667px;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+
+.calc_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 667px;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    align-items:center;
+}
+.title-block_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 131px;
+}
+.title-block{
+    display: flex;
+    width: 541px;
+    height: 94px;
+    flex-direction: column;
+    justify-content: center;
+}
+.title-block_firstTitle{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 30px;
+    font-family: 'Russo One';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    color: #585858;
+}
+.title-block_secondTitle{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 50px;
+    color: #ADADAD;
+    font-family: 'Russo One';
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 58px;
+}
+.title-block_thirthTitle{
+    margin-left: 70%;
+    color: #2C87BB;
+    font-family: 'Russo One';
+    font-size: 24px;
+    line-height: 29px;
+}
+.input-block_container{
+    display: flex;
+    width: 100%;
+    min-height: 390px;
+}
+.input-block_side{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    min-height: 390px;
+}
+.input-block_sideLeft{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    min-height: 390px;
+}
+.input-minicontainer{
+    display: flex;
+    width: 200px;
+    height: 19px;
+}
+label{
+    margin-left: 25px;
+    font-family: "Roboto";
+    font-size: 16px;
+    width: 185px;
+}
+.send_container,  .send_City-display, 
+.delivery_city-display,  
+.weight_container{
+    display: flex;
+    justify-content: space-between;
+    width: 415px;
+    height: 35px;
+}
+.text{
+    font-family: "Roboto";
+    font-size: 16px;
+    line-height: 35px;
+}
+.sendingType, .sendingRange, .sendCity, .deliveryCity,  .insurance, .COD{
+    display: flex;
+    width: 200px;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: "Roboto";
+    font-size: 16px;
+}
+.sendCity, .deliveryCity{
+    width: 335px;
+    border-radius: 3px;
+    box-sizing:border-box;
+}
+ .COD:hover, .sendingType:hover, .insurance:hover, .deliveryCity:hover, .sendCity:hover, .weight:hover, .volume:hover, .input_length-field:hover, .input_width-field:hover, .input_height-field:hover{
+    border: 1px solid #2C87BB;
+    box-shadow: 0px 0px 4px 2px rgba(44, 135, 187, 0.25);
+    border-radius: 3px;
+}
+.weight, .volume{
+    width: 335px;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing:border-box;
+    font-family: "Roboto";
+    font-size: 16px;
+}
+
+.COD:focus, .volume:focus, .weight:focus, .sendingType:focus, .insurance:focus, .deliveryCity:focus, .sendCity:focus{
+    box-shadow: none;
+    outline-color: #2C87BB;
+}
+.sendDeliveryCity_block{
+    display: none;
+    width: 415px;
+    height: 93px;
+    justify-content: space-between;
+    margin-top: 24px;
+    flex-direction: column;
+}
+.city-display{
+    display: flex;
+    justify-content: space-between;
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 35px;
+}
+.adressTakeDeliverySelect-container{
+    display: flex;
+    width: 278px;
+    flex-direction: column;
+    align-content: space-around;
+}
+.addressTake, .adressDelivery{
+    display: flex;
+    width: 100%;
+    height: 50px;
+}
+.volume_select-container{
+    display: flex;
+    width: 278px;
+    flex-direction: column;
+}
+.volume_container, .insurance_container, .COD_container{
+    display: flex;
+    width: 415px;
+    min-height: 35px;
+    justify-content: space-between;
+}
+.palletType-container{
+    display: none;
+    width: 100px;
+    height: 101px;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 26px;
+    margin-left: 40px;
+}
+.palletType-minicontainer{
+    display: flex;
+    width: 100%;
+    height: 33.3333px;
+}
+.resultbtn{
+    width: 322px;
+    height: 58px;
+    font-family: "Russo One";
+    font-size: 24px;
+    font-weight: 400;
+    color: #FFFFFF;
+    border: none;
+    background: #2C87BB;
+    box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.15);
+}
+.resultbtn:hover{
+    color: #2C87BB;
+    background-color: #FFFFFF;
+    border: 2px solid #2C87BB;
+    box-shadow: 0px 0px 8px 10px rgba(44, 135, 187, 0.15);
+    border-radius: 3px;
+    cursor: pointer;
+}
+.resultbtn:active{
+    color: #FFFFFF;
+    background: #2C87BB;
+    border: 2px solid #585858;
+    box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+.insuranceCOD_block{
+    display: flex;
+    flex-direction: column;
+    width: 415px;
+    height: 94px;
+    justify-content: space-between;
+    margin-bottom: 38px;
+}
+.weightvolume_block{
+    display: flex;
+    flex-direction: column;
+    width: 415px;
+    height: 94px;
+    justify-content: space-between;
+}
+.input-block_mini{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 158px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.input-block_miniUp{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 230px;
+    align-items: center;
+}
+.input-block_miniUpLeft{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 230px;
+    align-items: center;
+}
+.input-block_miniweightvolume{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 158px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.input-deliveryType-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 53px;
+    width: 415px;
+    min-height: 60px;
+}
+.input-addressDeliveryCheck-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 26px;
+    width: 215px;
+    height: 60px;
+}
+.input-deliveryType-containerMini{
+    display: flex;
+    width: 100%;
+    height: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+.adressTakeDelivery-block{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 60px;
+    justify-content: space-between;
+}
+.sendAddressDelivery_container{
+    display: flex;
+    flex-direction: column;
+    width: 415px;
+    height: 121px;
+    justify-content: space-between;
+    margin-top: 53px;
+}
+.volume-calculate_block{
+    display: flex;
+    width: 100%;
+    height: 38px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.volume-calculate_container{
+    display: flex;
+    width: 415px;
+    height: 38px;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+.volume-calc{
+    display: flex;
+    width: 145px;
+    height: 18px;
+    justify-content: space-between;
+}
+.volume-calc:hover{
+    color: #2C87BB;
+    cursor: pointer;
+}
+.calc-image{
+    border: 3px solid black;
+}
+.calc-image:hover{
+    border: 3px solid #2C87BB;
+    
+}
+.img{
+    filter: sepia(100%);
+}
+.calc-text{
+    font-family: "Roboto";
+    font-size: 14px;
+}
+option{
+    background-color: #E5E5E5;
+    font-family: "Roboto";
+    font-size: 16px;
+}
+option.selected{
+    font-family: "Roboto";
+    font-size: 16px
+}
+option:hover{
+    background-color: rgba(44, 135, 187, 0.25);
+}
+.sendingType{
+    font-family: "Roboto";
+    font-size: 16px
+}
+.address-take_radio, .address-delivery_radio, .comfort-pass_radio, .city-limits_radio, .across-Ukraine_radio, .region-limit_radio {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 15px;
+    background-color:#E5E5E5;
+    border: 2px solid #999;
+    outline: none;
+    transform: rotate(45deg);
+  }
+  .tiny-pallet, .middle-pallet, .large-pallet{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 48px;
+    height: 15px;
+    background-color:#E5E5E5;
+    border: 2px solid #999;
+    outline: none;
+    transform: rotate(45deg);
+  }
+  
+  .address-take_radio:checked, .address-delivery_radio:checked, .comfort-pass_radio:checked, .city-limits_radio:checked, .across-Ukraine_radio:checked, .region-limit_radio:checked, .tiny-pallet:checked, .middle-pallet:checked, .large-pallet:checked {
+    border: 4px solid #2C87BB;
+    background-color: #2C87BB;
+  }
+  .tiny-pallet:checked, .middle-pallet:checked, .large-pallet:checked{
+    background-color: #2C87BB;
+    width: 40px;
+  }
+  .address-take_radio:hover, .address-delivery_radio:hover, .comfort-pass_radio:hover, .city-limits_radio:hover, .across-Ukraine_radio:hover, .region-limit_radio:hover, .tiny-pallet:hover, .middle-pallet:hover, .large-pallet:hover {
+    border: 4px solid #2C87BB;
+  }
+  .tiny-pallet:hover, .middle-pallet:hover, .large-pallet:hover{
+    border: 4px solid #2C87BB;
+    width: 40px;
+  }
+  .resultBtn-container{
+      display: flex;
+      width: 100%;
+      height: 94px;
+      justify-content: center;
+      align-items: center;
+  }
+  .input-addressDeliveryCheck-block{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+  }
+  .result_block{
+    display: none;
+    width: 100%;
+    min-height: 291px;
+    justify-content: center;
+    align-items: center;
+  }
+  .result_block-container{
+    display: flex;
+    justify-content: space-between;
+    width: 920px;
+    min-height: 203px;
+  }
+  .result_titles{
+      display: flex;
+      width: 460px;
+      height: 203px;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+  .rate-block, .addressTakeDisplay-block, .addressDeliveryDisplay-block, .insurancePay-block, .CODpay-block{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 35px;
+      background: linear-gradient(270deg, rgba(44, 135, 187, 0.25) 0%, rgba(44, 135, 187, 0) 85.87%), #FFFFFF;
+      border-radius: 3px;
+      line-height: 35px;
+      font-family: "Roboto";
+      font-size: 16px;
+      font-weight: 500;
+  }
+  .rate, .addressTakeDisplay, .addressDeliveryDisplay, .insurancePay, .CODpay{
+      margin-right: 10px;
+  }
+  .result_display_block{
+      display: flex;
+      width: 320px;
+      height: 203px;
+      flex-direction: column;
+      align-items:center;
+      border-radius: 3px;
+      background: #E5E5E5;
+  }
+  .result-display-title{
+    display: flex;
+    width: 146px;
+    height: 56px;
+    font-family: "Roboto";
+    font-size: 24px;
+    color: #585858;
+    text-align: center;
+    margin-top: 28px;
+  }
+  .result-display-field{
+    display: flex;
+    width: 237px;
+    height: 58px;
+    background: #FFFFFF;
+    border: 1px solid #2C87BB;
+    box-sizing: border-box;
+    justify-content: center;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 58px;
+    font-family: "Russo one";
+    font-size: 24px;
+    color: #2C87BB;
+    margin-top: 19px;
+  }
+  .volume-calcInput-container{
+      display: none;
+      width: 291px;
+      height: 154px;
+      position: absolute;
+      justify-content: center;
+      align-items:center;
+      z-index: 2;
+      top: 10px;
+      right: 67px;
+      border-radius: 3px;
+      background-color: #E5E5E5;
+      border: 1px solid #585858;
+  }
+  .volume-fields_block{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 243px;
+      height: 119px;
+  }
+  .input_dimention-block{
+      display: flex;
+      width: 100%;
+      margin-bottom: 5px;
+      height: 24px;
+      line-height: 24px;
+      justify-content: space-between;
+  }
+  .dimention-input{
+      margin-left: 0;
+  }
+  .dimentions_submit{
+      width: 243px;
+      height: 24px;
+      margin-top: 13px;
+      background: rgba(44, 135, 187, 0.25);
+      border: 2px solid #2C87BB;
+      border-radius: 3px;
+      font-family: "Roboto";
+      font-size: 14px;
+      font-weight: 500;
+      color: #000000;
+      box-sizing:border-box;
+  }
+  .dimentions_submit:hover{
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid #2C87BB;
+    color: #2C87BB;
+  }
+  .dimentions_submit:active{
+    background: rgba(44, 135, 187, 0.75);
+    border: 2px solid #585858;
+    color: #000000;
+    
+  }
+
+  .input_length-field, .input_height-field, .input_width-field{
+      border-radius: 3px;
+  }
+  .input_length-field:focus, .input_height-field:focus, .input_width-field:focus{
+    outline: #2C87BB;
+  }
+  .input_length-field:hover, .input_width-field:hover, .input_height-field:hover{
+    border: 2px solid #2C87BB;
+    box-sizing: border-box;
+  }
+  .weight::placeholder{
+      padding: 0 280px;
+  }
+  .volume::placeholder{
+      padding: 0 255px;
+  }
+  .volume:focus::placeholder, .weight:focus::placeholder, .insurance:focus::placeholder, .COD:focus::placeholder, .input_length-field:focus::placeholder, .input_width-field:focus::placeholder, .input_height-field:focus::placeholder{
+      color:transparent;
+  }
+  .insurance::placeholder, .COD::placeholder{
+    padding: 0 145px;
+  }
+  .input_length-field::placeholder, .input_width-field::placeholder, .input_height-field::placeholder{
+    padding: 0 120px;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .main_container{
+        min-width: 900px;
+        max-width: 1100px; 
+    }
+}
+
+@media screen and (max-width: 950px){
+    .main_container{
+        min-width: 700px;
+        max-width: 850px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .main_container{
+        max-width: 620px;
+        min-width: 587px;
+    }
+    .input-block_container{
+        flex-direction: column;
+        min-height: 390px;
+    }
+    .input-block_side, .input-block_sideLeft{
+        width: 100%;
+    }
+    .resultBtn-container{
+        align-items: flex-end;
+        height: 178px;
+    }
+    .resultbtn{
+        margin-bottom: 40px;
+        width: 380px;
+    }
+    .input-block_sideLeft{
+        min-height: 320px;
+    }
+    .input-block_miniUpLeft{
+        height: 150px;
+    }
+    .result_block-container{
+        flex-direction: column;
+        min-height: 203px;
+        align-items: center;
+    }
+    .result_titles{
+        width: 90%;
+    }
+    .result_display_block{
+        width: 90%;
+    }
+    .main{
+        min-height: 1200px;
+    }
+    .volume-calcInput-container{
+        right: 100px;
+    }
+}
+@media screen and (max-width: 550px){
+    .main_container{
+        max-width: 350px;
+        min-width: 300px;
+        margin-top: 10px;
+    }
+    .input-block_container{
+        flex-direction: column;
+        min-height: 390px;
+    }
+    .input-block_side, .input-block_sideLeft{
+        width: 100%;
+    }
+    .title-block{
+        width: 90%;
+    }
+    .title-block_firstTitle{
+        font-size: 20px;
+    }
+    .title-block_secondTitle{
+        font-size: 38px;
+    }
+    .title-block_thirthTitle{
+        font-size: 20px;
+    }
+    .input-deliveryType-container{
+        width: 100%;
+        margin-top: 0px;
+        min-height: 130px;
+        align-items: space-between;
+    }
+    .input-deliveryType-containerMini{
+        flex-direction: column;
+        margin-top: 15px;
+    }
+    .insuranceCOD_block{
+        width: 90%;
+        height: 130px;
+    }
+    .insurance_container{
+        width: 100%;
+        align-items:center;
+    }
+    .COD_container{
+        width: 100%;
+        align-items:center;
+    }
+    .text{
+        line-height: 23px;
+        align-items: center;
+    }
+    .insurance, .COD {
+        width: 160px;
+        height: 36px;
+    }
+    .resultbtn{
+        margin-bottom: 40px;
+        width: 250px;
+    }
+    .input-block_side{
+        min-height: 100px;
+    }
+    .input-block_miniUp{
+        height: 150px;
+    }
+    .sendAddressDelivery_container{
+        min-height: 80px;
+        margin-top: 0px;
+        width: 90%;
+    }
+    .send_container{
+        width: 100%;
+    }
+    .sendingType{
+        width: 160px;
+    }
+    .palletType-container{
+        margin-left: 5px;
+    }
+    .weightvolume_block{
+        width: 100%;
+        align-items: center;
+    }
+    .weight_container{
+        width: 90%;
+        align-items:center;
+    }
+    .volume_container{
+        width: 90%;
+        align-items:center;
+    }
+    .volume-calculate_container{
+        width: 100%;
+    }
+    .volume-calc{
+        margin-right: 10px;
+    }
+    .weight{
+        width: 160px;
+    }
+    .volume{
+        width: 160px;
+    }
+    .weight::placeholder{
+        padding: 0 120px;
+    }
+    .volume::placeholder{
+        padding: 0 95px;
+    }
+    .insurance::placeholder, .COD::placeholder{
+        padding: 0 115px;
+    }
+    .sendDeliveryCity_block{
+        width: 100%;
+        align-items: center;
+    }
+    .city-display{
+        width: 90%;
+    }
+    .sendCity, .deliveryCity {
+        width: 200px;
+    }
+    .volume-calcInput-container{
+        right: 30px;
+    }
+}
