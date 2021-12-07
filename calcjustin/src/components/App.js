@@ -1,5 +1,5 @@
 import React from 'react';
-import VolumeCalc from './inputs/VolumeCalc';
+import ModalVolumeCalculator from './inputs/ModalVolumeCalculator';
 import Cities from './inputs/Cities';
 import InputInsurance from './inputs/InputIsurance';
 import InputCOD from './inputs/InputCOD';
@@ -15,53 +15,21 @@ import PalletType from './inputs/PalletType';
 import CalcDropDown from './inputs/CalcDropDown';
 
 import { connect } from 'react-redux';
-
+import { setCalculatorModalVisibility } from '../actions';
 
 
 class App extends React.Component {
-   state = {
-      cityFrom: undefined,
-      cityWhere: undefined,
-      length: undefined,
-      width: undefined,
-      height: undefined,
-      volumeCalcVisibility: undefined
-   }
 
-   onLengthInput = (value) => {
-      this.setState({ length: value })
+   onClickHandler = (e) => {
+      e.stopPropagation();
    }
-
-   onWidthInput = (value) => {
-      this.setState({ width: value })
-   }
-
-   onHeightInput = (value) => {
-      this.setState({ height: value })
-   }
-
-   volumeCalculate = () => {
-      this.setState({
-         volumeCalculated: (this.state.length * this.state.width * this.state.height) / 1000000,
-         volumeCalcVisibility: "none"
-      }, () => { console.log(this.state.volumeCalculated) })
-   }
-
-   dropDownInit = (value) => {
-      this.setState({ volumeCalcVisibility: value })
-   }
-
-   onClickOutSideHandler = () => {
-      this.setState({ volumeCalcVisibility: "none" })
-   }
-
 
    render() {
       return (
          <div>
             <div
                className="main"
-               onClick={this.onClickOutSideHandler}
+               onClick={() => this.props.setCalculatorModalVisibility()}
             >
                <div className="main_container">
                   <div className="calc_container">
@@ -77,8 +45,6 @@ class App extends React.Component {
                               />
                               <Cities
                                  visibility={this.props.range === "acrossUkraine" ? "flex" : ""}
-                                 onCityFromSelect={this.onCityFromSelect}
-                                 onCityWhereSelect={this.onCityWhereSelect}
                               />
                            </div>
                            <div className="input-block_mini">
@@ -135,17 +101,20 @@ class App extends React.Component {
                                  />
                               </div>
                               <div className="volume-calculate_block">
-                                 <div className="volume-calculate_container">
+                                 <div
+                                    className="volume-calculate_container"
+                                    onClick={this.onClickHandler}
+                                 >
                                     <CalcDropDown
                                        dropDownInit={this.dropDownInit}
                                     />
                                  </div>
-                                 <VolumeCalc
+                                 <ModalVolumeCalculator
                                     onLengthInput={this.onLengthInput}
                                     onWidthInput={this.onWidthInput}
                                     onHeightInput={this.onHeightInput}
                                     volumeCalculate={this.volumeCalculate}
-                                    visibility={this.state.volumeCalcVisibility === "flex" ? "flex" : ""}
+                                    visibility={this.props.volumeCalcVisibility === true ? "flex" : ""}
                                  />
                               </div>
                            </div>
@@ -197,7 +166,14 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-   return { range: state.range, type: state.type }
+   return {
+      range: state.range,
+      type: state.type,
+      length: state.length,
+      width: state.width,
+      height: state.height,
+      volumeCalcVisibility: state.volumeCalcVisibility
+   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, { setCalculatorModalVisibility })(App)

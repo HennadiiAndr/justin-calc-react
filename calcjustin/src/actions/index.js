@@ -1,3 +1,5 @@
+
+
 export const setInsurance = sum => {
    return {
       type: "SET_INSURANCE",
@@ -56,5 +58,56 @@ export const setPalletType = type => {
    return {
       type: "SET_PALLET_TYPE",
       payload: type
+   }
+}
+
+export const setCityFrom = city => {
+   return {
+      type: "SET_CITY_FROM",
+      payload: city
+   }
+}
+
+export const setCityTo = city => {
+   return {
+      type: "SET_CITY_TO",
+      payload: city
+   }
+}
+
+export const setLength = cm => {
+   return {
+      type: "SET_LENGTH",
+      payload: cm
+   }
+}
+
+export const setWidth = cm => {
+   return {
+      type: "SET_WIDTH",
+      payload: cm
+   }
+}
+
+export const setHeigth = cm => {
+   return {
+      type: "SET_HEIGTH",
+      payload: cm
+   }
+}
+
+export const setCalculatorModalVisibility = (data) => {
+   return {
+      type: "SET_VOL_CALC_VISIBILITY",
+      payload: data
+   }
+}
+
+export const calcVolume = () => {
+   return (dispatch, getState)=> {
+      const state= getState();
+      const volume=(state.length*state.width*state.height)/1000000;
+      dispatch(setVolume(volume));
+      dispatch(setCalculatorModalVisibility(false));
    }
 }

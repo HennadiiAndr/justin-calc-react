@@ -1,32 +1,15 @@
 import React from 'react';
 
-import '../../Styles.css'
+import '../../Styles.css';
 
-class VolumeCalc extends React.Component {
-   state = {
-      length: undefined,
-      width: undefined,
-      height: undefined,
-      blurClick: "false"
-   }
+import { connect } from 'react-redux';
+import { setLength } from '../../actions';
+import { setWidth } from '../../actions';
+import { setHeigth } from '../../actions';
+import { setCalculatorModalVisibility, calcVolume } from '../../actions';
 
-   getLengthInput = (event) => {
-      this.setState({ length: event.target.value },
-         () => { this.props.onLengthInput(this.state.length) }
-      )
-   }
+class ModalVolumeCalculator extends React.Component {
 
-   getWidthInput = (event) => {
-      this.setState({ width: event.target.value },
-         () => { this.props.onWidthInput(this.state.width) }
-      )
-   }
-
-   getHeightInput = (event) => {
-      this.setState({ height: event.target.value },
-         () => { this.props.onHeightInput(this.state.height) }
-      )
-   }
 
    onClickhandler = (event) => {
       event.stopPropagation()
@@ -52,7 +35,8 @@ class VolumeCalc extends React.Component {
                      className="input_length-field"
                      type="number"
                      placeholder="см"
-                     onChange={this.getLengthInput}
+                     value={this.props.length}
+                     onChange={(e) => this.props.setLength(e.target.value)}
                   ></input>
                </div>
                <div className="input_dimention-block">
@@ -61,7 +45,8 @@ class VolumeCalc extends React.Component {
                      className="input_width-field"
                      type="number"
                      placeholder="см"
-                     onChange={this.getWidthInput}
+                     value={this.props.width}
+                     onChange={(e) => this.props.setWidth(e.target.value)}
                   ></input>
                </div>
                <div className="input_dimention-block">
@@ -70,12 +55,13 @@ class VolumeCalc extends React.Component {
                      className="input_height-field"
                      type="number"
                      placeholder="см"
-                     onChange={this.getHeightInput}
+                     value={this.props.height}
+                     onChange={(e) => this.props.setHeigth(e.target.value)}
                   ></input>
                </div>
                <button
                   className="dimentions_submit"
-                  onClick={this.props.volumeCalculate}
+                  onClick={this.props.calcVolume}
                >
                   Посчитать объем
                </button>
@@ -84,4 +70,13 @@ class VolumeCalc extends React.Component {
       )
    }
 }
-export default VolumeCalc
+
+const mapStateToProps = state => {
+   return {
+      length: state.length,
+      width: state.width,
+      height: state.height
+   }
+}
+
+export default connect(mapStateToProps, { setLength, setWidth, setHeigth, calcVolume })(ModalVolumeCalculator);

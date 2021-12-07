@@ -2,13 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import '../../Styles.css';
 
+import { connect } from 'react-redux';
+import { setCityFrom } from '../../actions';
+import { setCityTo } from '../../actions';
+
+
 
 class Cities extends React.Component {
 
    state = {
-      citiesArr: [],
-      selectedCityFrom: '',
-      selectedCityWhere: ''
+      citiesArr: []
    }
 
    componentDidMount() {
@@ -22,14 +25,6 @@ class Cities extends React.Component {
          })
    }
 
-   onSelectFrom = (event) => {
-      this.setState({ selectedCityFrom: event.target.value })
-   }
-
-   onSelectWhere = (event) => {
-      this.setState({ selectedCityWhere: event.target.value })
-   }
-
 
    render() {
       const renderListFrom = this.state.citiesArr.map((city) => {
@@ -37,7 +32,7 @@ class Cities extends React.Component {
             {city}
          </option>
       })
-      const renderListWhere = this.state.citiesArr.filter((city) => city !== this.state.selectedCityFrom).map((city) => {
+      const renderListWhere = this.state.citiesArr.filter((city) => city !== this.props.cityFrom).map((city) => {
          return <option key={city}>
             {city}
          </option>
@@ -49,7 +44,7 @@ class Cities extends React.Component {
                <select
                   className="sendCity"
                   defaultValue="выберите откуда"
-                  onChange={this.onSelectFrom}
+                  onChange={(e) => this.props.setCityFrom(e.target.value)}
                >
                   <option value="выберите откуда" disabled></option>
                   {renderListFrom}
@@ -60,7 +55,7 @@ class Cities extends React.Component {
                <select
                   className="deliveryCity"
                   defaultValue="выберите куда"
-                  onChange={this.onSelectWhere}
+                  onChange={(e) => this.props.setCityTo(e.target.value)}
                >
                   <option value="выберите куда" disabled ></option>
                   {renderListWhere}
@@ -71,4 +66,8 @@ class Cities extends React.Component {
    }
 }
 
-export default Cities
+const mapStateToProps = state => {
+   return { cityFrom: state.cityFrom, cityTo: state.cityTo }
+}
+
+export default connect(mapStateToProps, { setCityFrom, setCityTo })(Cities);

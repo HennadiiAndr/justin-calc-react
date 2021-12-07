@@ -7,6 +7,12 @@ import selectTypeReducer from './selectTypeReducer';
 import addressTakeCheckReducer from './addressTakeCheckReducer';
 import addressDeliveryCheckReducer from './addressDeliveryCheckReducer';
 import palletTypeReducer from './palletTypeReducer';
+import setCityFromReducer from './setCityFromReducer';
+import setCityToReducer from './setCityToReducer';
+import setLengthReducer from './setLengthReducer';
+import setWidthReducer from './setWidthReducer';
+import setHeigthReducer from './setHeigthReducer';
+import setVolumeCalcVisibleReducer from './setVolumeCalcVisibleReducer';
 import { combineReducers } from 'redux';
 
 const allReducers = combineReducers({
@@ -18,7 +24,13 @@ const allReducers = combineReducers({
    type: selectTypeReducer,
    addressTakeCheck: addressTakeCheckReducer,
    addressDeliveryCheck: addressDeliveryCheckReducer,
-   palletType: palletTypeReducer
+   palletType: palletTypeReducer,
+   cityFrom: setCityFromReducer,
+   cityTo: setCityToReducer,
+   length: setLengthReducer,
+   width: setWidthReducer,
+   height: setHeigthReducer,
+   volumeCalcVisibility: setVolumeCalcVisibleReducer
 })
 
 export default allReducers;

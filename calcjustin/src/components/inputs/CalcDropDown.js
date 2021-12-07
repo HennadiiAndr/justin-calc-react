@@ -2,17 +2,12 @@ import React from 'react';
 import '../../Styles.css';
 import calc from '../../Vector.png';
 
+import { connect } from 'react-redux';
+import { setCalculatorModalVisibility } from '../../actions';
+
+
 
 class CalcDropDown extends React.Component {
-   state = {
-      volumeCalcVisibility: undefined
-   }
-
-   onVolumeCalcClick = () => {
-      this.setState({ volumeCalcVisibility: "flex" },
-         () => { this.props.dropDownInit(this.state.volumeCalcVisibility) }
-      )
-   }
 
    render() {
       return (
@@ -20,7 +15,7 @@ class CalcDropDown extends React.Component {
             <img src={calc} alt="calc" className="calc-image"></img>
             <div
                className="calc-text"
-               onClick={this.onVolumeCalcClick}
+               onClick={() => { this.props.setCalculatorModalVisibility() }}
             >
                Посчитать объем
             </div>
@@ -29,4 +24,8 @@ class CalcDropDown extends React.Component {
    };
 }
 
-export default CalcDropDown
+const mapStateToProps = state => {
+   return { volumeCalcVisibility: state.volumeCalcVisibility, }
+}
+
+export default connect(mapStateToProps, { setCalculatorModalVisibility })(CalcDropDown);
