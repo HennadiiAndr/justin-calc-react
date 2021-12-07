@@ -1,70 +1,31 @@
 import React from 'react';
 import VolumeCalc from './inputs/VolumeCalc';
 import Cities from './inputs/Cities';
-import Input from './inputs/Input';
-import Select from './inputs/Select';
+import InputInsurance from './inputs/InputIsurance';
+import InputCOD from './inputs/InputCOD';
+import InputWeight from './inputs/InputWeight';
+import InputVolume from './inputs/InputVolume';
 import DeliveryTypeSelect from './inputs/DeliveryTypeSelect';
-import CheckBoxInput from './inputs/CheckBoxInput';
+import DeliveryRangeSelect from './inputs/DeliveryRangeSelect';
+import AddressTakeCheck from './inputs/AddressTakeCheck';
+import AddressDeliveryCheck from './inputs/AddressDeliveryCheck';
 import Header from './Header';
 import '../Styles.css';
 import PalletType from './inputs/PalletType';
 import CalcDropDown from './inputs/CalcDropDown';
 
+import { connect } from 'react-redux';
+
 
 
 class App extends React.Component {
    state = {
-      insurance: undefined,
-      COD: undefined,
-      weight: undefined,
-      volume: undefined,
-      sendingType: undefined,
-      addressTakeIsChecked: false,
-      addressDeliveryIsChecked: false,
-      deliveryTypeCheck: undefined,
-      palletType: undefined,
       cityFrom: undefined,
       cityWhere: undefined,
       length: undefined,
       width: undefined,
       height: undefined,
       volumeCalcVisibility: undefined
-   }
-
-   onInsuranceInput = (value) => {
-      this.setState({ insurance: +value })
-   }
-
-   onCODInput = (value) => {
-      this.setState({ COD: +value })
-   }
-
-   onWeightInput = (value) => {
-      this.setState({ weight: +value })
-   }
-
-   onVolumeInput = (value) => {
-      this.setState({ volume: +value })
-   }
-
-   onSelectItemHandler = (value) => {
-      this.setState({ sendingType: value })
-   }
-
-   onCheckAddressTake = (value) => {
-      this.setState({ addressTakeIsChecked: value })
-   }
-
-   onCheckAddressDelivery = (value) => {
-      this.setState({ addressDeliveryIsChecked: value })
-   }
-
-   onDeliveryTypeCheck = (value) => {
-      this.setState({ deliveryTypeCheck: value })
-   }
-
-   onPalletTypeCheck = (value) => {
-      this.setState({ palletType: value })
    }
 
    onLengthInput = (value) => {
@@ -108,29 +69,26 @@ class App extends React.Component {
                      <div className="input-block_container">
                         <div className="input-block_sideLeft">
                            <div className="input-block_miniUpLeft">
-                              <DeliveryTypeSelect
+                              <DeliveryRangeSelect
                                  titleOne="удобная передача"
                                  titleTwo="в пределах города"
                                  titleThree="по Украине"
                                  titleFour="в пределах области"
-                                 onDeliveryTypeCheck={this.onDeliveryTypeCheck}
                               />
                               <Cities
-                                 visibility={this.state.deliveryTypeCheck === "acrossUkraine" ? "flex" : ""}
+                                 visibility={this.props.range === "acrossUkraine" ? "flex" : ""}
                                  onCityFromSelect={this.onCityFromSelect}
                                  onCityWhereSelect={this.onCityWhereSelect}
                               />
                            </div>
                            <div className="input-block_mini">
                               <div className="insuranceCOD_block">
-                                 <Input
-                                    onInputHandler={this.onInsuranceInput}
+                                 <InputInsurance
                                     title='заявленная стоимость'
                                     placeholder='грн.'
                                     clsName='insurance'
                                  />
-                                 <Input
-                                    onInputHandler={this.onCODInput}
+                                 <InputCOD
                                     title='наложенный платеж'
                                     placeholder='грн.'
                                     clsName='insurance'
@@ -141,39 +99,36 @@ class App extends React.Component {
                         <div className="input-block_side">
                            <div className="input-block_miniUp">
                               <div className="sendAddressDelivery_container">
-                                 <Select onSelectItemHandler={this.onSelectItemHandler} />
+                                 <DeliveryTypeSelect />
                                  <div className="input-addressDeliveryCheck-block">
                                     <div className="input-addressDeliveryCheck-container">
-                                       <CheckBoxInput
-                                          onCheckHandler={this.onCheckAddressTake}
+                                       <AddressTakeCheck
+
                                           clsName="address-take_radio"
                                           title="адресный забор"
                                        />
                                        <div className="input-deliveryType-containerMini">
-                                          <CheckBoxInput
-                                             onCheckHandler={this.onCheckAddressDelivery}
+                                          <AddressDeliveryCheck
+
                                              clsName="address-delivery_radio"
                                              title="адресная доставка"
                                           />
                                        </div>
                                     </div>
                                     <PalletType
-                                       visibility={this.state.sendingType === "pallet" ? "flex" : ""}
-                                       onPalletTypeCheck={this.onPalletTypeCheck}
+                                       visibility={this.props.type === "pallet" ? "flex" : ""}
                                     />
                                  </div>
                               </div>
                            </div>
                            <div className="input-block_miniweightvolume">
                               <div className="weightvolume_block">
-                                 <Input
-                                    onInputHandler={this.onWeightInput}
+                                 <InputWeight
                                     title='Вес'
                                     placeholder='кг'
                                     clsName='weight'
                                  />
-                                 <Input
-                                    onInputHandler={this.onVolumeInput}
+                                 <InputVolume
                                     title='Объем'
                                     placeholder='м.куб.'
                                     clsName='volume'
@@ -241,4 +196,8 @@ class App extends React.Component {
    };
 }
 
-export default App
+const mapStateToProps = state => {
+   return { range: state.range, type: state.type }
+}
+
+export default connect(mapStateToProps)(App)

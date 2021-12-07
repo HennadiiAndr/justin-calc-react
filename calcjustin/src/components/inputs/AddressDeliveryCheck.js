@@ -1,17 +1,11 @@
 import React from 'react';
 import '../../Styles.css';
 
-class CheckBoxInput extends React.Component {
+import { connect } from 'react-redux';
+import { setAddressDelivery } from '../../actions';
 
-   state = {
-      isChecked: ''
-   }
+class AddressDeliveryCheck extends React.Component {
 
-   isChecked = (event) => {
-      this.setState({ isChecked: event.target.checked },
-         () => { this.props.onCheckHandler(this.state.isChecked) }
-      )
-   }
 
    render() {
       return (
@@ -21,8 +15,8 @@ class CheckBoxInput extends React.Component {
                   type='checkbox'
                   className={this.props.clsName}
                   name="addressTake"
-                  checked={this.state.isChecked}
-                  onChange={this.isChecked}
+                  checked={this.props.addressDeliveryCheck}
+                  onChange={(e) => this.props.setAddressDelivery(e.target.checked)}
                ></input>
                <label htmlFor="address-take">{this.props.title}</label>
             </div>
@@ -31,4 +25,8 @@ class CheckBoxInput extends React.Component {
    };
 }
 
-export default CheckBoxInput;
+const mapStateToProps = state => {
+   return { addressDeliveryCheck: state.addressTakeCheck }
+}
+
+export default connect(mapStateToProps, { setAddressDelivery })(AddressDeliveryCheck);

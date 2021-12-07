@@ -1,14 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setCOD } from '../../actions';
 import '../../Styles.css';
 
-class Input extends React.Component {
-   state = {
-      inputNumber: ''
-   }
-   onInput = event => {
-      this.setState({ inputNumber: event.target.value },
-         () => { this.props.onInputHandler(this.state.inputNumber) })
-   }
+class InputCOD extends React.Component {
 
    render() {
       return (
@@ -17,9 +12,9 @@ class Input extends React.Component {
             <input
                className={this.props.clsName}
                type="number"
+               value={this.props.COD}
                placeholder={this.props.placeholder}
-               value={this.state.inputNumber}
-               onChange={this.onInput}
+               onChange={(e) => this.props.setCOD(e.target.value)}
             ></input>
          </div>
       );
@@ -27,4 +22,10 @@ class Input extends React.Component {
 
 }
 
-export default Input;
+const mapStateToProps = (state) => {
+   return { COD: state.COD };
+}
+
+export default connect(mapStateToProps,
+   { setCOD }
+)(InputCOD);

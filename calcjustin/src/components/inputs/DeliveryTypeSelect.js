@@ -1,68 +1,30 @@
 import React from 'react';
 import '../../Styles.css';
 
+import { connect } from 'react-redux';
+import { setType } from '../../actions';
+
 class DeliveryTypeSelect extends React.Component {
-   state = {
-      selectedOption: ''
-   }
-
-   onVolumeChange = (event) => {
-      this.setState({ selectedOption: event.target.value },
-         () => { this.props.onDeliveryTypeCheck(this.state.selectedOption) }
-      )
-   }
-
 
    render() {
       return (
-         <div className="input-deliveryType-container">
-            <div className="input-deliveryType-containerMini">
-               <div className="input-minicontainer">
-                  <input
-                     type='radio'
-                     onChange={this.onVolumeChange}
-                     value="comfortPass"
-                     checked={this.state.selectedOption === "comfortPass"}
-                     className="comfort-pass_radio"
-                     name="deliveryType"></input>
-                  <label htmlFor="comfort-pass_radio">{this.props.titleOne}</label>
-               </div>
-               <div className="input-minicontainer">
-                  <input
-                     type='radio'
-                     onChange={this.onVolumeChange}
-                     value="cityLimits"
-                     checked={this.state.selectedOption === "cityLimits"}
-                     className="city-limits_radio"
-                     name="deliveryType"></input>
-                  <label htmlFor="city-limits_radio">{this.props.titleTwo}</label>
-               </div>
-            </div>
-            <div className="input-deliveryType-containerMini">
-               <div className="input-minicontainer">
-                  <input
-                     type='radio'
-                     onChange={this.onVolumeChange}
-                     value="acrossUkraine"
-                     checked={this.state.selectedOption === "acrossUkraine"}
-                     className="across-Ukraine_radio"
-                     name="deliveryType"></input>
-                  <label htmlFor="across-Ukraine_radio">{this.props.titleThree}</label>
-               </div>
-               <div className="input-minicontainer">
-                  <input
-                     type='radio'
-                     onChange={this.onVolumeChange}
-                     value="regionLimit"
-                     checked={this.state.selectedOption === "regionLimit"}
-                     className="region-limit_radio"
-                     name="deliveryType"></input>
-                  <label htmlFor="region-limits_radio">{this.props.titleFour}</label>
-               </div>
-            </div>
+         <div className="send_container">
+            <div className="text">Тип отправления</div>
+            <select
+               className="sendingType"
+               onChange={(e) => this.props.setType(e.target.value)}
+            >
+               <option value="packadge" id="packadge" >посылка</option>
+               <option value="load" id="load" >груз</option>
+               <option value="pallet">палета</option>
+            </select>
          </div>
       );
    };
 }
 
-export default DeliveryTypeSelect;
+const mapStateToProps = state => {
+   return { type: state.type }
+}
+
+export default connect(mapStateToProps, { setType })(DeliveryTypeSelect);
