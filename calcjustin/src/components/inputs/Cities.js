@@ -1,38 +1,29 @@
 import React from 'react';
-import axios from 'axios';
 import '../../Styles.css';
 
 import { connect } from 'react-redux';
-import { setCityFrom } from '../../actions';
-import { setCityTo } from '../../actions';
+import {
+   setCityFrom,
+   setCityTo,
+   setZone
+} from '../../actions';
 
 
 
 class Cities extends React.Component {
 
-   state = {
-      citiesArr: []
+   componentDidUpdate() {
+      this.props.setZone();
    }
-
-   componentDidMount() {
-      axios.get('https://woldemarnow-jcalc.herokuapp.com/get-cities')
-         .then((res) => {
-            const arr = []
-            for (let key in res.data) {
-               arr.push(key)
-            }
-            this.setState({ citiesArr: arr })
-         })
-   }
-
 
    render() {
-      const renderListFrom = this.state.citiesArr.map((city) => {
+      const citiesArr = Object.keys(this.props.citiesObject)
+      const renderListFrom = citiesArr.map((city) => {
          return <option key={city}>
             {city}
          </option>
       })
-      const renderListWhere = this.state.citiesArr.filter((city) => city !== this.props.cityFrom).map((city) => {
+      const renderListWhere = citiesArr.filter((city) => city !== this.props.cityFrom).map((city) => {
          return <option key={city}>
             {city}
          </option>
@@ -67,7 +58,11 @@ class Cities extends React.Component {
 }
 
 const mapStateToProps = state => {
-   return { cityFrom: state.cityFrom, cityTo: state.cityTo }
+   return {
+      cityFrom: state.cityFrom,
+      cityTo: state.cityTo,
+      citiesObject: state.citiesObject
+   }
 }
 
-export default connect(mapStateToProps, { setCityFrom, setCityTo })(Cities);
+export default connect(mapStateToProps, { setCityFrom, setCityTo, setZone })(Cities);

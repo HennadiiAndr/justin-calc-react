@@ -1,4 +1,4 @@
-const selectRangeReducer = (state = '', action) => {
+const selectRangeReducer = (state = "comfort-pass", action) => {
    if (action.type === "SET_RANGE") {
       return state = action.payload
    };

@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWeight } from '../../actions';
+import {
+   setWeight
+}
+   from '../../actions';
 import '../../Styles.css';
 
 class InputWeight extends React.Component {
@@ -14,7 +17,9 @@ class InputWeight extends React.Component {
                type="number"
                value={this.props.weight}
                placeholder={this.props.placeholder}
-               onChange={(e) => this.props.setWeight(e.target.value)}
+               onChange={(e) => {
+                  this.props.setWeight(e.target.value);
+               }}
             ></input>
          </div>
       );
@@ -23,9 +28,17 @@ class InputWeight extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { weight: state.weight };
+   return {
+      weight: state.weight,
+      addressTakeSum: state.addressTakeSum,
+      actualWeight: state.actualWeight,
+      addressDeliverySum: state.addressDeliverySum,
+      tariffSum: state.tariffSum
+   };
 }
 
 export default connect(mapStateToProps,
-   { setWeight }
+   {
+      setWeight
+   }
 )(InputWeight);

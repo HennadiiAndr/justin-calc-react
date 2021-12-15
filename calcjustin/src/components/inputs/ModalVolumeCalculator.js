@@ -3,10 +3,18 @@ import React from 'react';
 import '../../Styles.css';
 
 import { connect } from 'react-redux';
-import { setLength } from '../../actions';
-import { setWidth } from '../../actions';
-import { setHeigth } from '../../actions';
-import { setCalculatorModalVisibility, calcVolume } from '../../actions';
+import {
+   setLength,
+   setWidth,
+   setHeigth,
+   calcVolume,
+   calcWeightVolume,
+   checkVolume,
+   checkDimentions,
+   calcAdressTakeSum,
+   calcAdressDeliverySum,
+   calcActualWeight
+} from '../../actions';
 
 class ModalVolumeCalculator extends React.Component {
 
@@ -14,7 +22,6 @@ class ModalVolumeCalculator extends React.Component {
    onClickhandler = (event) => {
       event.stopPropagation()
    }
-
 
    render() {
       return (
@@ -61,7 +68,15 @@ class ModalVolumeCalculator extends React.Component {
                </div>
                <button
                   className="dimentions_submit"
-                  onClick={this.props.calcVolume}
+                  onClick={() => {
+                     this.props.calcVolume();
+                     this.props.calcWeightVolume();
+                     this.props.checkVolume();
+                     this.props.checkDimentions();
+                     this.props.calcAdressDeliverySum();
+                     this.props.calcActualWeight();
+                     this.props.calcAdressTakeSum();
+                  }}
                >
                   Посчитать объем
                </button>
@@ -75,8 +90,24 @@ const mapStateToProps = state => {
    return {
       length: state.length,
       width: state.width,
-      height: state.height
+      height: state.height,
+      addressTakeSum: state.addressTakeSum,
+      actualWeight: state.actualWeight,
+      addressDeliverySum: state.addressDeliverySum
    }
 }
 
-export default connect(mapStateToProps, { setLength, setWidth, setHeigth, calcVolume })(ModalVolumeCalculator);
+export default connect(mapStateToProps, {
+   setLength,
+   setWidth,
+   setHeigth,
+   calcVolume,
+   calcWeightVolume,
+   checkVolume,
+   checkDimentions,
+   calcAdressTakeSum,
+   calcAdressDeliverySum,
+   calcActualWeight
+}
+)
+   (ModalVolumeCalculator);

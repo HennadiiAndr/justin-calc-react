@@ -2,10 +2,16 @@ import React from 'react';
 import '../../Styles.css';
 
 import { connect } from 'react-redux';
-import { setAddressDelivery } from '../../actions';
+import {
+   setAddressDelivery,
+   calcAdressDeliverySum
+} from '../../actions';
 
 class AddressDeliveryCheck extends React.Component {
 
+   componentDidUpdate() {
+      this.props.setAdressDeliverySum();
+   }
 
    render() {
       return (
@@ -16,7 +22,10 @@ class AddressDeliveryCheck extends React.Component {
                   className={this.props.clsName}
                   name="addressTake"
                   checked={this.props.addressDeliveryCheck}
-                  onChange={(e) => this.props.setAddressDelivery(e.target.checked)}
+                  onChange={(e) => {
+                     this.props.setAddressDelivery(e.target.checked);
+                     this.props.calcAdressDeliverySum();
+                  }}
                ></input>
                <label htmlFor="address-take">{this.props.title}</label>
             </div>
@@ -26,7 +35,10 @@ class AddressDeliveryCheck extends React.Component {
 }
 
 const mapStateToProps = state => {
-   return { addressDeliveryCheck: state.addressTakeCheck }
+   return {
+      addressDeliveryCheck: state.addressDeliveryCheck,
+      addressDeliverySum: state.addressDeliverySum
+   }
 }
 
-export default connect(mapStateToProps, { setAddressDelivery })(AddressDeliveryCheck);
+export default connect(mapStateToProps, { setAddressDelivery, calcAdressDeliverySum })(AddressDeliveryCheck);

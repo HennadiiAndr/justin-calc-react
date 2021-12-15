@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCOD } from '../../actions';
+import { setCOD, setCODPayment } from '../../actions';
 import '../../Styles.css';
 
 class InputCOD extends React.Component {
@@ -14,7 +14,7 @@ class InputCOD extends React.Component {
                type="number"
                value={this.props.COD}
                placeholder={this.props.placeholder}
-               onChange={(e) => this.props.setCOD(e.target.value)}
+               onChange={(e) => { this.props.setCOD(e.target.value); this.props.setCODPayment() }}
             ></input>
          </div>
       );
@@ -23,9 +23,12 @@ class InputCOD extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { COD: state.COD };
+   return {
+      COD: state.COD,
+      CODPayment: state.CODPayment
+   };
 }
 
 export default connect(mapStateToProps,
-   { setCOD }
+   { setCOD, setCODPayment }
 )(InputCOD);

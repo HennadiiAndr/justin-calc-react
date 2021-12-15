@@ -1,8 +1,8 @@
-const addressTakeCheckReducer = (state = false, action) => {
+const addressTakeCheck = (state = false, action) => {
    if (action.type === "SET_ADDRESS_TAKE") {
       return state = !state
    };
    return state;
 };
 
-export default addressTakeCheckReducer;
+export default addressTakeCheck;

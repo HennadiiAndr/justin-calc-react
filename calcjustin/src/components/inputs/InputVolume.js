@@ -1,9 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setVolume } from '../../actions';
+import {
+   setVolume,
+   calcWeightVolume,
+   checkVolume,
+   calcActualWeight,
+   calcAdressTakeSum,
+   calcAdressDeliverySum
+}
+   from '../../actions';
 import '../../Styles.css';
 
 class InputVolume extends React.Component {
+
 
    render() {
       return (
@@ -14,7 +23,9 @@ class InputVolume extends React.Component {
                type="number"
                value={this.props.volume}
                placeholder={this.props.placeholder}
-               onChange={(e) => this.props.setVolume(e.target.value)}
+               onChange={(e) => {
+                  this.props.setVolume(e.target.value);
+               }}
             ></input>
          </div>
       );
@@ -23,9 +34,22 @@ class InputVolume extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-   return { volume: state.volume };
+   return {
+      volume: state.volume,
+      weightVolume: state.weightVolume,
+      actualWeight: state.actualWeight,
+      addressTakeSum: state.addressTakeSum,
+      addressDeliverySum: state.addressDeliverySum
+   };
 }
 
 export default connect(mapStateToProps,
-   { setVolume }
+   {
+      setVolume,
+      calcWeightVolume,
+      checkVolume,
+      calcActualWeight,
+      calcAdressTakeSum,
+      calcAdressDeliverySum
+   }
 )(InputVolume);

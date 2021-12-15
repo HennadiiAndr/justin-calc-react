@@ -1,4 +1,4 @@
-const selectTypeReducer = (state = '', action) => {
+const selectTypeReducer = (state = 'посылка', action) => {
    if (action.type === "SET_TYPE") {
       return state = action.payload
    };

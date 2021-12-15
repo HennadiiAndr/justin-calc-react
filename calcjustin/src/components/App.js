@@ -1,4 +1,5 @@
 import React from 'react';
+import Alert from './Alert';
 import ModalVolumeCalculator from './inputs/ModalVolumeCalculator';
 import Cities from './inputs/Cities';
 import InputInsurance from './inputs/InputIsurance';
@@ -9,19 +10,28 @@ import DeliveryTypeSelect from './inputs/DeliveryTypeSelect';
 import DeliveryRangeSelect from './inputs/DeliveryRangeSelect';
 import AddressTakeCheck from './inputs/AddressTakeCheck';
 import AddressDeliveryCheck from './inputs/AddressDeliveryCheck';
+import ResultDisplay from './ResultDisplay';
+import ResultDisplayButton from './ResultDisplayButton';
 import Header from './Header';
 import '../Styles.css';
 import PalletType from './inputs/PalletType';
 import CalcDropDown from './inputs/CalcDropDown';
 
 import { connect } from 'react-redux';
-import { setCalculatorModalVisibility } from '../actions';
+import {
+   getCities,
+   getTariffs,
+   setCalculatorModalVisibility,
+   setDeliveryTypes
+} from '../actions';
 
 
 class App extends React.Component {
 
-   onClickHandler = (e) => {
-      e.stopPropagation();
+   componentDidMount() {
+      this.props.getCities();
+      this.props.getTariffs();
+      this.props.setDeliveryTypes();
    }
 
    render() {
@@ -29,8 +39,9 @@ class App extends React.Component {
          <div>
             <div
                className="main"
-               onClick={() => this.props.setCalculatorModalVisibility()}
+               onClick={() => this.props.volumeCalcVisibility ? this.props.setCalculatorModalVisibility() : ''}
             >
+               <Alert />
                <div className="main_container">
                   <div className="calc_container">
                      <Header />
@@ -44,7 +55,7 @@ class App extends React.Component {
                                  titleFour="в пределах области"
                               />
                               <Cities
-                                 visibility={this.props.range === "acrossUkraine" ? "flex" : ""}
+                                 visibility={this.props.range === "across-Ukraine" ? "flex" : ""}
                               />
                            </div>
                            <div className="input-block_mini">
@@ -69,20 +80,16 @@ class App extends React.Component {
                                  <div className="input-addressDeliveryCheck-block">
                                     <div className="input-addressDeliveryCheck-container">
                                        <AddressTakeCheck
-
                                           clsName="address-take_radio"
                                           title="адресный забор"
                                        />
-                                       <div className="input-deliveryType-containerMini">
-                                          <AddressDeliveryCheck
-
-                                             clsName="address-delivery_radio"
-                                             title="адресная доставка"
-                                          />
-                                       </div>
+                                       <AddressDeliveryCheck
+                                          clsName="address-delivery_radio"
+                                          title="адресная доставка"
+                                       />
                                     </div>
                                     <PalletType
-                                       visibility={this.props.type === "pallet" ? "flex" : ""}
+                                       visibility={this.props.type === "палета" ? "flex" : ""}
                                     />
                                  </div>
                               </div>
@@ -105,9 +112,7 @@ class App extends React.Component {
                                     className="volume-calculate_container"
                                     onClick={this.onClickHandler}
                                  >
-                                    <CalcDropDown
-                                       dropDownInit={this.dropDownInit}
-                                    />
+                                    <CalcDropDown />
                                  </div>
                                  <ModalVolumeCalculator
                                     onLengthInput={this.onLengthInput}
@@ -120,43 +125,8 @@ class App extends React.Component {
                            </div>
                         </div>
                      </div>
-                     <div className="resultBtn-container">
-                        <button className="resultbtn">УЗНАТЬ ЦЕНУ</button>
-                     </div>
-                     <div className="result_block">
-                        <div className="result_block-container">
-                           <div className="result_titles">
-                              <div className="rate-block">
-                                 <div className="rate-text">Тариф:</div>
-                                 <div className="rate"></div>
-                              </div>
-                              <div className="addressTakeDisplay-block">
-                                 <div className="addressTakeDisplay-text">Адресный забор:</div>
-                                 <div className="addressTakeDisplay"></div>
-                              </div>
-                              <div className="addressDeliveryDisplay-block">
-                                 <div className="addressDeliveryDisplay-text">Адресная доставка:</div>
-                                 <div className="addressDeliveryDisplay"></div>
-                              </div>
-                              <div className="insurancePay-block">
-                                 <div className="insurancePay-text">Страховой платеж:</div>
-                                 <div className="insurancePay"></div>
-                              </div>
-                              <div className="CODpay-block">
-                                 <div className="CODpay-text">Комиссия за наложенный платеж:</div>
-                                 <div className="CODpay"></div>
-                              </div>
-
-                           </div>
-                           <div className="result_display_block">
-                              <div className="result-display-title">Итоговая стоимость</div>
-                              <div className="result-display-field">
-                                 <div className="result-display"></div>
-                              </div>
-                           </div>
-
-                        </div>
-                     </div>
+                     <ResultDisplayButton />
+                     <ResultDisplay />
                   </div>
                </div>
             </div>
@@ -172,8 +142,20 @@ const mapStateToProps = state => {
       length: state.length,
       width: state.width,
       height: state.height,
-      volumeCalcVisibility: state.volumeCalcVisibility
+      volumeCalcVisibility: state.volumeCalcVisibility,
+      citiesObject: state.citiesObject,
+      tariffs: state.tariffs,
+      deliveryTypesList: state.deliveryTypesList,
+      zone: state.zone,
+      packadgeTariff: state.packadgeTariff,
+      loadTariff: state.loadTariff,
+      palletTariff: state.palletTariff
    }
 }
 
-export default connect(mapStateToProps, { setCalculatorModalVisibility })(App)
+export default connect(mapStateToProps, {
+   getCities,
+   getTariffs,
+   setCalculatorModalVisibility,
+   setDeliveryTypes
+})(App)
