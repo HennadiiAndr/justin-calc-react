@@ -3,8 +3,7 @@ import '../../Styles.css';
 
 import { connect } from 'react-redux';
 import {
-   setAddressTake,
-   calcAdressTakeSum
+   setAddressTake
 } from '../../actions';
 
 class AddressTakeCheck extends React.Component {
@@ -19,8 +18,7 @@ class AddressTakeCheck extends React.Component {
                   name="addressTake"
                   checked={this.props.addressTakeCheck}
                   onChange={(e) => {
-                     this.props.setAddressTake(e.target.checked);
-                     this.props.calcAdressTakeSum();
+                     this.props.setAddressTake(e.target.checked)
                   }}
                ></input>
                <label htmlFor="address-take">{this.props.title}</label>
@@ -32,9 +30,8 @@ class AddressTakeCheck extends React.Component {
 
 const mapStateToProps = state => {
    return {
-      addressTakeCheck: state.addressTakeCheck,
-      addressTakeSum: state.addressTakeSum
+      addressTakeCheck: state.addressTakeCheck
    }
 }
 
-export default connect(mapStateToProps, { setAddressTake, calcAdressTakeSum })(AddressTakeCheck);
+export default connect(mapStateToProps, { setAddressTake })(AddressTakeCheck);

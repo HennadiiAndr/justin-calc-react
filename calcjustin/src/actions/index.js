@@ -1,5 +1,6 @@
 import getDataFromApi from '../apis/getDataFromApi';
 
+
 export const setInsurance = sum => {
    return (dispatch) => {
       dispatch(calcInsurancePayment(sum))
@@ -51,14 +52,16 @@ export const setType = type => {
 }
 
 export const setAddressTake = () => {
-   return {
-      type: "SET_ADDRESS_TAKE",
+   return (dispatch) => {
+      dispatch({ type: "SET_ADDRESS_TAKE" });
+      dispatch(calcAdressTakeSum());
    }
 }
 
 export const setAddressDelivery = () => {
-   return {
-      type: "SET_ADDRESS_DELIVERY",
+   return (dispatch) => {
+      dispatch({ type: "SET_ADDRESS_DELIVERY" });
+      dispatch(calcAdressDeliverySum());
    }
 }
 
@@ -140,7 +143,8 @@ export const calcInsurancePayment = () => {
    return (dispatch, getState) => {
       const state = getState();
       const insurancePayment = state.insurance > 200 ? state.insurance * 0.05 : 0;
-      dispatch({ type: "CALC_INSURANCE_PAYMENT", payload: insurancePayment })
+      dispatch({ type: "CALC_INSURANCE_PAYMENT", payload: insurancePayment });
+      dispatch(calcResultSum());
    }
 }
 
@@ -148,7 +152,8 @@ export const setCODPayment = () => {
    return (dispatch, getState) => {
       const state = getState();
       const CODPayment = (state.COD * 0.02) + 15;
-      dispatch({ type: "SET_COD_PAYMENT", payload: CODPayment })
+      dispatch({ type: "SET_COD_PAYMENT", payload: CODPayment });
+      dispatch(calcResultSum());
    }
 }
 
@@ -325,6 +330,7 @@ export const calcAdressTakeSum = () => {
          sum = 0;
       };
       dispatch({ type: "CALC_ADDRESSTAKE_SUM", payload: sum });
+      dispatch(calcResultSum());
    }
 }
 
@@ -352,6 +358,7 @@ export const calcAdressDeliverySum = () => {
          sum = 0;
       };
       dispatch({ type: "CALC_ADDRESSDELIVERY_SUM", payload: sum });
+      dispatch(calcResultSum());
    }
 };
 
@@ -456,5 +463,14 @@ export const calcTariffSum = () => {
          }
       }
       dispatch({ type: "CALC_TARIFF_SUM", payload: tariffSum });
+      dispatch(calcResultSum());
    }
-}
+};
+
+export const calcResultSum = () => {
+   return (dispatch, getState) => {
+      const state = getState();
+      const resultSum = state.tariffSum + state.addressDeliverySum + state.addressTakeSum + state.CODPayment + state.insurancePayment;
+      dispatch({ type: "CALC_RESULT_SUM", payload: resultSum });
+   };
+};

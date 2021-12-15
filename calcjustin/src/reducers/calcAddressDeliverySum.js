@@ -1,4 +1,4 @@
-const calcAddressDeliverySum = (state = 0, action) => {
+const calcAddressDeliverySum = (state = '', action) => {
    if (action.type === "CALC_ADDRESSDELIVERY_SUM") {
       return state = +action.payload;
    };

@@ -27,6 +27,7 @@ import setZoneRateReducer from './setZoneRateReducer';
 import calcAddressTakeSum from './calcAddressTakeSum';
 import calcAddressDeliverySum from './calcAddressDeliverySum';
 import calcTariffSum from './calcTariffSum';
+import calcResultSum from './calcResultSum';
 import { combineReducers } from 'redux';
 
 const allReducers = combineReducers({
@@ -58,7 +59,8 @@ const allReducers = combineReducers({
    rate: setZoneRateReducer,
    addressTakeSum: calcAddressTakeSum,
    addressDeliverySum: calcAddressDeliverySum,
-   tariffSum: calcTariffSum
+   tariffSum: calcTariffSum,
+   resultSum: calcResultSum
 })
 
 export default allReducers;

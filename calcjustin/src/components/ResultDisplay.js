@@ -10,15 +10,15 @@ class ResultDisplay extends React.Component {
                <div className="result_titles">
                   <div className="rate-block">
                      <div className="rate-text">Тариф:</div>
-                     <div className="rate"></div>
+                     <div className="rate">{this.props.tariffSum}</div>
                   </div>
                   <div className="addressTakeDisplay-block">
                      <div className="addressTakeDisplay-text">Адресный забор:</div>
-                     <div className="addressTakeDisplay"></div>
+                     <div className="addressTakeDisplay">{this.props.addressTakeSum}</div>
                   </div>
                   <div className="addressDeliveryDisplay-block">
                      <div className="addressDeliveryDisplay-text">Адресная доставка:</div>
-                     <div className="addressDeliveryDisplay"></div>
+                     <div className="addressDeliveryDisplay">{this.props.addressDeliverySum}</div>
                   </div>
                   <div className="insurancePay-block">
                      <div className="insurancePay-text">Страховой платеж:</div>
@@ -32,7 +32,7 @@ class ResultDisplay extends React.Component {
                <div className="result_display_block">
                   <div className="result-display-title">Итоговая стоимость</div>
                   <div className="result-display-field">
-                     <div className="result-display"></div>
+                     <div className="result-display">{this.props.resultSum}</div>
                   </div>
                </div>
             </div>
@@ -45,7 +45,11 @@ const mapStateToProps = state => {
    return {
       insurancePayment: state.insurancePayment,
       CODPayment: state.CODPayment,
-      resultBlockVisibility: state.resultBlockVisibility
+      resultBlockVisibility: state.resultBlockVisibility,
+      tariffSum: state.tariffSum,
+      addressTakeSum: state.addressTakeSum,
+      addressDeliverySum: state.addressDeliverySum,
+      resultSum: state.resultSum
    }
 }
 
